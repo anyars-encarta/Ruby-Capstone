@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Represents a Game with various attributes such as item_id, multiplayer, last_played_at.
 class Game
   attr_accessor :multiplayer, :last_played_at

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Represents an item with various attributes such as genre, author, source, and label.
 class Item
   attr_accessor :gener, :author, :label
