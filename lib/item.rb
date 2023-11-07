@@ -16,6 +16,7 @@ class Item
   def save_author(author)
     @author = author
     @author_id = author.id
+    author.add_item(self)
   end
 
   def save_label(label)
