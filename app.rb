@@ -1,6 +1,6 @@
-require_relative './lib/item'
-require_relative './lib/game/game'
-require_relative './lib/game/author'
+require_relative '/lib/item'
+require_relative '/lib/game/game'
+require_relative '/lib/game/author'
 # Represents an app with various attributes such as item.
 class App
   attr_accessor :item
