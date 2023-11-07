@@ -45,6 +45,7 @@ def choice_list(choice)
 end
 
 def quit
+  @app.save_data
   puts 'Thank you for using our Catalog App. Goodbye!'
   exit
 end

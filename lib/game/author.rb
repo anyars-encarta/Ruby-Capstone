@@ -22,4 +22,18 @@ class Author
   def self.all
     @all ||= []
   end
+
+  def to_json(*_args)
+    {
+      id: @id,
+      first_name: @first_name,
+      last_name: @last_name,
+      items: @items.map(&:id)
+    }.to_json
+  end
+
+  def self.from_json(json_data)
+    author = JSON.parse(json_data)
+    new(author['id'], author['first_name'], author['last_name'])
+  end
 end

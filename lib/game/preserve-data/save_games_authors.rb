@@ -1,9 +1,12 @@
-def save_games_authors
-  data_dir = File.join(File.dirname(__FILE__), 'lib', 'data')
-  Dir.mkdir(data_dir) unless File.directory?(data_dir)
+require 'fileutils'
+require 'json'
 
-  games_file = File.join(data_dir, 'games.json')
-  authors_file = File.join(data_dir, 'authors.json')
+DATA_PATH = 'lib/data'.freeze
+FileUtils.mkdir_p(DATA_PATH)
+
+def save_games_authors
+  games_file = File.join(DATA_PATH, 'games.json')
+  authors_file = File.join(DATA_PATH, 'authors.json')
 
   # Serialize and save games to games.json
   File.open(games_file, 'w') do |file|

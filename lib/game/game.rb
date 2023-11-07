@@ -15,4 +15,25 @@ class Game < Item
   def can_be_archived?
     super && (Time.now.year - @last_played_at.year) > 2
   end
+
+  def to_json(*_args)
+    {
+      id: @id,
+      publish_date: @publish_date,
+      archived: @archived,
+      item_id: @item_id,
+      multiplayer: @multiplayer,
+      last_played_at: @last_played_at,
+      title: @title,
+      author_id: @author.id
+    }.to_json
+  end
+
+  def self.from_json(json_data)
+    game = JSON.parse(json_data)
+    # Convert the 'publish_date' string to a Time object
+    game['publish_date'] = Time.parse(game['publish_date'])
+    author = Author.all.find { |a| a.id == game['author_id'] }
+    new(game['id'], game['publish_date'], game['archived'], game.merge(author: author))
+  end
 end
