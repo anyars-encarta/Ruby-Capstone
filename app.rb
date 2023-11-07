@@ -1,6 +1,6 @@
-require_relative '/lib/item'
-require_relative '/lib/game/game'
-require_relative '/lib/game/author'
+require_relative './lib/item'
+require_relative './lib/game/game'
+require_relative './lib/game/author'
 # Represents an app with various attributes such as item.
 class App
   attr_accessor :item
@@ -96,9 +96,7 @@ class App
 
   def create_game(game_title, game_author)
     Game.new(
-      @item.length + 1,
       Time.now,
-      false,
       item_id: @item.length + 1,
       multiplayer: true,
       last_played_at: Time.now,
