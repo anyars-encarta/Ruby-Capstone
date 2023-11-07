@@ -11,11 +11,15 @@ class Main
 
   def main
     loop do
+      puts ' '
       puts 'Welcome to our Catalog App!'
+      puts '=================================='
       puts 'Please select an option:'
+
       display_menu
       choice = gets.chomp.to_i
       handle_choice(choice)
+      puts '=================================='
     end
   end
 end
