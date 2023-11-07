@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require './lib/item'
 
 # Represents an app with various attributes such as item.
