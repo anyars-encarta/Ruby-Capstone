@@ -10,7 +10,7 @@ class App
 
   def initialize
     @item = []
-    load_data
+    # load_data
   end
 
   def load_data
@@ -106,9 +106,8 @@ class App
     Author.new(@item.length + 1, first_name, last_name)
   end
 
-  def create_game(id, game_title, game_author)
+  def create_game(game_title, game_author)
     Game.new(
-      id, # Pass the 'id' as the first argument
       Time.now,
       item_id: @item.length + 1,
       multiplayer: true,
