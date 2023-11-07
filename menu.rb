@@ -30,15 +30,15 @@ end
 def choice_add(choice)
   case choice
   when 7 then @app.add_a_book
-  when 8 then  @app.add_a_music_album
-  when 9 then  @app.add_a_game
+  when 8 then @app.add_a_music_album
+  when 9 then @app.add_a_game
   end
 end
 
 def choice_list(choice)
   case choice
-  when 1 then  @app.list_all_books
-  when 2 then  @app.list_all_music_albums
+  when 1 then @app.list_all_books
+  when 2 then @app.list_all_music_albums
   when 3 then @app.list_of_games
   when 4 then @app.list_all_genres
   when 5 then @app.list_all_labels
