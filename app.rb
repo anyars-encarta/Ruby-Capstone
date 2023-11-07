@@ -10,7 +10,7 @@ class App
 
   def initialize
     @item = []
-    # load_data
+    load_data
   end
 
   def load_data
@@ -29,7 +29,6 @@ class App
     puts 'List of all music albums:'
   end
 
-  # Implemented List Games
   def list_of_games
     puts 'List of all games:'
     @item.each do |item|
@@ -45,7 +44,6 @@ class App
     puts 'List of all labels:'
   end
 
-  # Implemented List Authors
   def list_all_authors
     puts 'List of all authors:'
     Author.all.each do |author|
@@ -73,7 +71,6 @@ class App
     puts "Music album created with title: #{album_title}, artiste: #{artiste}"
   end
 
-  # Implemented Add Game
   def add_a_game
     game_title, first_name, last_name = prompt_for_game_info
     game_author = create_game_author(first_name, last_name)

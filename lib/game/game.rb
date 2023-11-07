@@ -31,7 +31,6 @@ class Game < Item
 
   def self.from_json(json_data)
     game = JSON.parse(json_data)
-    # Convert the 'publish_date' string to a Time object
     game['publish_date'] = Time.parse(game['publish_date'])
     author = Author.all.find { |a| a.id == game['author_id'] }
     new(game['id'], game['publish_date'], game['archived'], game.merge(author: author))
