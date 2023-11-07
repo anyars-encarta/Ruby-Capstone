@@ -1,9 +1,9 @@
 require 'json'
-require_relative './lib/item'
-require_relative './lib/game/game'
-require_relative './lib/game/author'
-require_relative './lib/game/preserve-data/load_games_authors'
-require_relative './lib/game/preserve-data/save_games_authors'
+require './lib/item'
+require './lib/game/game'
+require './lib/game/author'
+require './lib/game/preserve-data/load_games_authors'
+require './lib/game/preserve-data/save_games_authors'
 # Represents an app with various attributes such as item.
 class App
   attr_accessor :item
