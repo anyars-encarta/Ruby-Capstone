@@ -1,5 +1,6 @@
-require './lib/item'
-
+require_relative './lib/item'
+require_relative './lib/game/game'
+require_relative './lib/game/author'
 # Represents an app with various attributes such as item.
 class App
   attr_accessor :item
@@ -18,6 +19,9 @@ class App
 
   def list_of_games
     puts 'List of all games:'
+    @item.each do |item|
+      puts "Title: #{item.title}, Author: #{item.author.full_name}" if item.is_a?(Game)
+    end
   end
 
   def list_all_genres
@@ -30,6 +34,9 @@ class App
 
   def list_all_authors
     puts 'List of all authors:'
+    Author.all.each do |author|
+      puts "Author ID: #{author.id}, Full Name: #{author.full_name}"
+    end
   end
 
   def add_a_book
@@ -53,12 +60,51 @@ class App
   end
 
   def add_a_game
-    puts 'Enter the games\'s title:'
+    game_title, first_name, last_name = prompt_for_game_info
+    game_author = create_game_author(first_name, last_name)
+
+    Author.all << game_author
+
+    game = create_game(game_title, game_author)
+
+    add_game_to_collection(game)
+    game_author.add_item(game)
+    puts "Game created with title: #{game_title}, author: #{first_name} #{last_name}"
+  end
+
+  private
+
+  def prompt_for_game_info
+    puts 'Enter the game\'s title:'
     game_title = gets.chomp
 
-    puts 'Enter the game\'s author:'
-    game_author = gets.chomp
+    puts 'Enter the game\'s author first name:'
+    first_name = gets.chomp
 
-    puts "Game created with title: #{game_title}, author: #{game_author}"
+    puts 'Enter the game\'s author last name:'
+    last_name = gets.chomp
+
+    [game_title, first_name, last_name]
+  end
+
+  def create_game_author(first_name, last_name)
+    Author.new(@item.length + 1, first_name, last_name)
+  end
+
+  def create_game(game_title, game_author)
+    Game.new(
+      @item.length + 1,
+      Time.now,
+      false,
+      item_id: @item.length + 1,
+      multiplayer: true,
+      last_played_at: Time.now,
+      title: game_title,
+      author: game_author
+    )
+  end
+
+  def add_game_to_collection(game)
+    @item << game
   end
 end
