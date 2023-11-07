@@ -5,8 +5,8 @@ class Item
   attr_accessor :gener, :author, :source, :label
   attr_reader :id, :publish_date, :archived
 
-  def initialize(id, publish_date, archived)
-    @id = id
+  def initialize(publish_date, archived: false)
+    @id = rand(1..500)
     @publish_date = publish_date
     @archived = archived
   end
