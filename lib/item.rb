@@ -2,8 +2,8 @@
 
 # Represents an item with various attributes such as genre, author, source, and label.
 class Item
-  attr_accessor :gener, :author, :source, :label
-  attr_reader :id, :publish_date, :archived
+  attr_accessor :gener, :author, :label
+  attr_reader :id, :publish_date, :archived, :author_id
 
   def initialize(id, publish_date, archived)
     @id = id
@@ -17,10 +17,7 @@ class Item
 
   def save_author(author)
     @author = author
-  end
-
-  def save_source(source)
-    @source = source
+    @author_id = author.id
   end
 
   def save_label(label)
