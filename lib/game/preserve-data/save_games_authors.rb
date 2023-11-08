@@ -1,7 +1,7 @@
 require 'fileutils'
 require 'json'
 
-DATA_PATH = 'lib/data'
+DATA_PATH = 'lib/data'.freeze
 FileUtils.mkdir_p(DATA_PATH)
 
 def save_games_authors
