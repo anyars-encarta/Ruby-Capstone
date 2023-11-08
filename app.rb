@@ -1,12 +1,24 @@
-require_relative '/lib/item'
-require_relative '/lib/game/game'
-require_relative '/lib/game/author'
+require 'json'
+require './lib/item'
+require './lib/game/game'
+require './lib/game/author'
+require './lib/game/preserve-data/load_games_authors'
+require './lib/game/preserve-data/save_games_authors'
 # Represents an app with various attributes such as item.
 class App
   attr_accessor :item
 
   def initialize
     @item = []
+    load_data
+  end
+
+  def load_data
+    load_games_authors
+  end
+
+  def save_data
+    save_games_authors
   end
 
   def list_all_books
@@ -17,7 +29,6 @@ class App
     puts 'List of all music albums:'
   end
 
-  # Implemented List Games
   def list_of_games
     puts 'List of all games:'
     @item.each do |item|
@@ -33,7 +44,6 @@ class App
     puts 'List of all labels:'
   end
 
-  # Implemented List Authors
   def list_all_authors
     puts 'List of all authors:'
     Author.all.each do |author|
@@ -61,7 +71,6 @@ class App
     puts "Music album created with title: #{album_title}, artiste: #{artiste}"
   end
 
-  # Implemented Add Game
   def add_a_game
     game_title, first_name, last_name = prompt_for_game_info
     game_author = create_game_author(first_name, last_name)
@@ -96,9 +105,7 @@ class App
 
   def create_game(game_title, game_author)
     Game.new(
-      @item.length + 1,
       Time.now,
-      false,
       item_id: @item.length + 1,
       multiplayer: true,
       last_played_at: Time.now,
