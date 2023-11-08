@@ -1,11 +1,13 @@
+require 'date'
+
 # Represents an item with various attributes such as genre, author, source, and label.
 class Item
-  attr_accessor :gener, :author, :label
-  attr_reader :id, :publish_date, :archived, :author_id
+  attr_accessor :genre, :author, :source, :label
+  attr_reader :id, :publish_date, :archived
 
   def initialize(publish_date, archived: false)
     @id = rand(1..500)
-    @publish_date = publish_date
+    @publish_date = Date.strptime(publish_date, '%Y-%m-%d')
     @archived = archived
   end
 
