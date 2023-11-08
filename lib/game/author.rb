@@ -1,7 +1,6 @@
 # Represents an Author class with various attributes such as id, first_name, last_name.
 class Author
-  attr_accessor :first_name, :last_name
-  attr_reader :id, :items
+  attr_accessor :id, :first_name, :last_name, :items
 
   def initialize(id, first_name, last_name)
     @id = id
@@ -28,7 +27,7 @@ class Author
       id: @id,
       first_name: @first_name,
       last_name: @last_name,
-      items: @items.map(&:id)
+      items: @items
     }.to_json
   end
 

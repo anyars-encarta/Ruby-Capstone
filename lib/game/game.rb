@@ -1,8 +1,8 @@
 require_relative '../item'
-
+require_relative 'author'
 # Represents a Game with various attributes such as item_id, multiplayer, last_played_at.
 class Game < Item
-  attr_accessor :item_id, :multiplayer, :last_played_at, :title
+  attr_accessor :item_id, :multiplayer, :last_played_at, :title, :author_id
 
   def initialize(publish_date, attributes = {})
     super(publish_date)
@@ -10,6 +10,12 @@ class Game < Item
     @multiplayer = attributes[:multiplayer] || true
     @last_played_at = attributes[:last_played_at] || Time.now
     @title = attributes[:title] || ''
+    @author_id = attributes[:author_id]
+    set_author if @author_id
+  end
+
+  def set_author
+    @author = Author.all.find { |a| a.id == @author_id }
   end
 
   def can_be_archived?
@@ -25,16 +31,14 @@ class Game < Item
       multiplayer: @multiplayer,
       last_played_at: @last_played_at,
       title: @title,
-      author_id: @author.id
+      author_id: author.nil? ? nil : author.id
     }.to_json
   end
 
   def self.from_json(json_data)
-    game = JSON.parse(json_data)
-    game['publish_date'] = DateTime.parse(game['publish_date'])
-    author_id = game['author_id']
-    author = Author.all.find { |a| a.id == author_id }
-    game['author'] = author
-    new(game['publish_date'], game)
+    game_data = JSON.parse(json_data)
+    game = new(game_data['publish_date'], game_data)
+    game.set_author if game.author_id
+    game
   end
 end
