@@ -22,13 +22,12 @@ RSpec.describe Game do
       current_time = DateTime.now
       expect(game.multiplayer).to be true
       expect(game.last_played_at.to_date).to eq(current_time.to_date)
-      expect(game.title).to eq('Sample Game Title')
     end
 
     it 'correctly sets title' do
-      game_attributes[:title] = game.title
-      game = Game.new(game_attributes[:title], game_attributes)
-
+      game_attributes[:title] = 'Sample Game Title'
+      game_attributes[:publish_date] = Date.today.strftime('%Y-%m-%d')
+      game = Game.new(game_attributes[:publish_date], game_attributes)
       expect(game.title).to eq('Sample Game Title')
     end
 
