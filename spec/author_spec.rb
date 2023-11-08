@@ -1,10 +1,7 @@
-# frozen_string_literal: true
-
 require 'rspec'
 require 'json'
 require_relative '../lib/game/author'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe Author do
   let(:author) { Author.new(25, 'John', 'Doe') }
 
@@ -51,4 +48,3 @@ RSpec.describe Author do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

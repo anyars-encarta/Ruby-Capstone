@@ -5,7 +5,6 @@ require_relative '../lib/game/author'
 require 'json'
 require 'date'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe Game do
   let(:author) { Author.new(1, 'John', 'Doe') }
   let(:game_attributes) do
@@ -66,4 +65,3 @@ RSpec.describe Game do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength
