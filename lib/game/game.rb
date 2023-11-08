@@ -1,4 +1,5 @@
 require_relative '../item'
+require_relative './author'
 
 # Represents a Game with various attributes such as item_id, multiplayer, last_played_at.
 class Game < Item
@@ -36,8 +37,9 @@ class Game < Item
   end
 
   def self.from_json(json_data)
-    game = JSON.parse(json_data)
-    game['publish_date'] = DateTime.parse(game['publish_date'])
-    new(game['publish_date'], game)
+    game_data = JSON.parse(json_data)
+    game = new(game_data['publish_date'], game_data)
+    game.set_author if game.author_id
+    game
   end
 end
