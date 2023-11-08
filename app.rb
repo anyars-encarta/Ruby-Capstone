@@ -72,8 +72,9 @@ class App
     puts 'Create Music Album:'
     puts 'The Album is in Spotify? (y/n)'
     on_spotify = gets.chomp
-    on_spotify = (on_spotify == 'y') || (on_spotify == 'Y')
-                   true
+    on_spotify = case on_spotify
+                 when 'y' then true
+                 when 'Y' then true
                  else
                    false
                  end
