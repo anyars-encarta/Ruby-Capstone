@@ -18,4 +18,8 @@ class Author
     item.author = self
     @items << item
   end
+
+  def self.all
+    @all ||= []
+  end
 end
