@@ -74,7 +74,6 @@ class App
     on_spotify = gets.chomp
     on_spotify = case on_spotify
                  when 'y' then true
-                 when 'Y' then true
                  else
                    false
                  end
