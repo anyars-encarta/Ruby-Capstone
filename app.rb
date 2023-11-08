@@ -73,10 +73,10 @@ class App
     puts 'The Album is in Spotify? (y/n)'
     on_spotify = gets.chomp
     on_spotify = if (on_spotify == 'y') || (on_spotify == 'Y')
-      true
-    else
-      false
-    end
+                   true
+                 else
+                   false
+                 end
     puts 'Enter the publish date:(yyyy-mm-dd)'
     publish_date = gets.chomp
     @album = add_new_music_album(publish_date, on_spotify)
