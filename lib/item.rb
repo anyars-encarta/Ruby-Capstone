@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'date'
 
 # Represents an item with various attributes such as genre, author, source, and label.
