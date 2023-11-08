@@ -2,7 +2,7 @@ require 'date'
 
 # Represents an item with various attributes such as genre, author, source, and label.
 class Item
-  attr_accessor :gener, :author, :source, :label, :genre
+  attr_accessor :genre, :author, :source, :label
   attr_reader :id, :publish_date, :archived
 
   def initialize(publish_date, archived: false)
@@ -17,10 +17,8 @@ class Item
 
   def save_author(author)
     @author = author
-  end
-
-  def save_source(source)
-    @source = source
+    @author_id = author.id
+    author.add_item(self)
   end
 
   def save_label(label)
