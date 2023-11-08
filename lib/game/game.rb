@@ -2,7 +2,7 @@ require_relative '../item'
 
 # Represents a Game with various attributes such as item_id, multiplayer, last_played_at.
 class Game < Item
-  attr_accessor :item_id, :multiplayer, :last_played_at, :title
+  attr_accessor :item_id, :multiplayer, :last_played_at, :title, :author_id
 
   def initialize(publish_date, attributes = {})
     super(publish_date)
@@ -10,6 +10,13 @@ class Game < Item
     @multiplayer = attributes[:multiplayer] || true
     @last_played_at = attributes[:last_played_at] || Time.now
     @title = attributes[:title] || ''
+    @author_id = attributes[:author_id]
+    @author = Author.all.find { |a| a.id == @author_id } # Set the author instance variable
+
+    if @author_id && @author.nil?
+      # Handle the case when the author is not found, e.g., raise an error or set a default author.
+      puts 'Author not found'
+    end
   end
 
   def can_be_archived?
