@@ -3,7 +3,7 @@ class Item
   attr_accessor :gener, :author, :label
   attr_reader :id, :publish_date, :archived, :author_id
 
-  @items = [] # Initialize the class variable as an empty array
+  @items = []
 
   def initialize(publish_date, archived: false)
     @id = rand(1..500)

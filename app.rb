@@ -78,7 +78,7 @@ class App
     Author.all << game_author
 
     game = create_game(game_title, game_author)
-    game_author.add_item(game) # Add this line to assign the game's author
+    game_author.add_item(game)
 
     add_game_to_collection(game)
     game_author.add_item(game)
