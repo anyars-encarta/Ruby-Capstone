@@ -11,12 +11,13 @@ class Game < Item
     @last_played_at = attributes[:last_played_at] || Time.now
     @title = attributes[:title] || ''
     @author_id = attributes[:author_id]
-    @author = Author.all.find { |a| a.id == @author_id } # Set the author instance variable
+    # @author = Author.all.find { |a| a.id == @author_id } # Set the author instance variable
+    # @author = nil
+    set_author if @author_id
+  end
 
-    if @author_id && @author.nil?
-      # Handle the case when the author is not found, e.g., raise an error or set a default author.
-      puts 'Author not found'
-    end
+  def set_author
+    @author = Author.all.find { |a| a.id == @author_id }
   end
 
   def can_be_archived?
@@ -32,16 +33,16 @@ class Game < Item
       multiplayer: @multiplayer,
       last_played_at: @last_played_at,
       title: @title,
-      author_id: @author.id
+      author_id: author.nil? ? nil : author.id
     }.to_json
   end
 
   def self.from_json(json_data)
     game = JSON.parse(json_data)
     game['publish_date'] = DateTime.parse(game['publish_date'])
-    author_id = game['author_id']
-    author = Author.all.find { |a| a.id == author_id }
-    game['author'] = author
+    # author_id = game['author_id']
+    # author = Author.all.find { |a| a.id == author_id }
+    # game['author'] = author unless author.nil?
     new(game['publish_date'], game)
   end
 end

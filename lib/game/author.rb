@@ -18,10 +18,6 @@ class Author
     @items << item
   end
 
-  # def add_item(item_id)
-  #   @items << item_id
-  # end
-
   def self.all
     @all ||= []
   end
@@ -34,6 +30,16 @@ class Author
       items: @items
     }.to_json
   end
+
+  # def self.from_json(json_data)
+  #   author_data = JSON.parse(json_data)
+  #   author = new(author_data['id'], author_data['first_name'], author_data['last_name'])
+  #   author_data['items'].each do |item_id|
+  #     item = Item.all.find { |i| i.id == item_id }
+  #     author.add_item(item) if item
+  #   end
+  #   author
+  # end
 
   def self.from_json(json_data)
     author = JSON.parse(json_data)

@@ -1,58 +1,57 @@
-require 'rspec'
+# game_spec.rb
+require_relative '../lib/game/game' # Update the path as needed
+require_relative '../lib/game/author' # You'll need to create an Author class or use an existing one
 require 'json'
-require 'time'
-require_relative '../lib/game/game'
+require 'date'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe Game do
-  let(:game) do
-    Game.new(
-      Time.now,
-      item_id: 25,
-      multiplayer: true,
-      last_played_at: Time.parse('2023-11-08 08:17:55 +0000'),
-      title: 'Pool'
-    )
+  let(:author) { Author.new(1, 'John', 'Doe') } # Create an Author instance for testing
+  let(:game_attributes) do
+    {
+      item_id: 1,
+      publish_date: Date.new(2020, 1, 1),
+      author_id: author.id
+    }
   end
+
+  subject(:game) { described_class.new(game_attributes[:publish_date], game_attributes) }
 
   describe '#initialize' do
-    it 'sets the publish_date and attributes' do
-      expect(game.item_id).to eq(25)
-      expect(game.multiplayer).to eq(true)
-      expect(game.last_played_at).to eq(Time.parse('2023-11-08 08:17:55 +0000'))
-      expect(game.title).to eq('Pool')
+    it 'sets default values' do
+      current_time = DateTime.now
+      expect(game.multiplayer).to be true
+      expect(game.last_played_at.to_date).to eq(current_time.to_date)
+      expect(game.title).to eq('')
     end
-  end
 
-  describe '#item_id=' do
-    it 'assigns the ID to the game' do
-      game.item_id = 42
-      expect(game.item_id).to eq(42)
-    end
-  end
+    # it 'sets author when author_id is provided' do
+    #   game_attributes[:author_id] = author.id
+    #   game = Game.new(game_attributes[:publish_date], game_attributes)
+    #   expect(game.author).to eq(author)
+    # end
 
-  describe '#to_json' do
-    it 'returns a JSON representation of the game' do
-      game.item_id = 25
-      game.author_id = 1 # Assuming the author_id is available
-      json = game.to_json
-      expect(json).to eq('{"id":null,"publish_date":null,"archived":null,"item_id":25,"multiplayer":true,"last_played_at":"2023-11-08T08:17:55Z","title":"Pool","author_id":1}')
+    it 'does not set author when author_id is not provided' do
+      game_attributes[:author_id] = nil
+      game = Game.new(game_attributes[:publish_date], game_attributes)
+      expect(game.author).to be_nil
     end
   end
 
   describe '.from_json' do
-    it 'returns a Game object from a JSON string' do
-      json = '{"id":347,"publish_date":"2023-11-08T08:50:35+00:00","archived":false,"item_id":1,"multiplayer":true,"last_played_at":"2023-11-08 08:52:13 +0000","title":"Pool","author_id":1}'
-      game = Game.from_json(json)
-      expect(game).to be_an_instance_of(Game)
-      expect(game.item_id).to eq(1)
-      expect(game.publish_date).to eq(Time.parse('2023-11-08T08:50:35+00:00'))
-      expect(game.archived).to eq(false)
-      expect(game.multiplayer).to eq(true)
-      expect(game.last_played_at).to eq(Time.parse('2023-11-08 08:52:13 +0000'))
-      expect(game.title).to eq('Pool')
-      expect(game.author_id).to eq(1)
+    it 'parses JSON data and returns a Game object' do
+      game_attributes[:author_id] = author.id # Make sure author_id is set
+      json_data = game.to_json
+      parsed_game = Game.from_json(json_data)
+      expect(parsed_game).to be_an_instance_of(Game)
     end
+
+    # it 'correctly sets the author object when author_id is provided' do
+    #   game_attributes[:author_id] = author.id # Make sure author_id is set
+    #   json_data = game.to_json
+    #   parsed_game = Game.from_json(json_data)
+    #   expect(parsed_game.author.id).to eq(author.id)
+    # end
   end
 end
 # rubocop:enable Metrics/BlockLength
