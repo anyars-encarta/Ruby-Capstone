@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Represents an Author class with various attributes such as id, first_name, last_name.
 class Author
   attr_accessor :id, :first_name, :last_name, :items

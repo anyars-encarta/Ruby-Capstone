@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 require_relative '../item'
-require_relative './author'
+require_relative './game'
 
 # Represents a Game with various attributes such as item_id, multiplayer, last_played_at.
 class Game < Item

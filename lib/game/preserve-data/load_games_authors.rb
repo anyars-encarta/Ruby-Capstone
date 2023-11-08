@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'date'
 
 def load_games_authors
