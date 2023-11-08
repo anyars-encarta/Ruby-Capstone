@@ -11,8 +11,6 @@ class Game < Item
     @last_played_at = attributes[:last_played_at] || Time.now
     @title = attributes[:title] || ''
     @author_id = attributes[:author_id]
-    # @author = Author.all.find { |a| a.id == @author_id } # Set the author instance variable
-    # @author = nil
     set_author if @author_id
   end
 
@@ -40,9 +38,6 @@ class Game < Item
   def self.from_json(json_data)
     game = JSON.parse(json_data)
     game['publish_date'] = DateTime.parse(game['publish_date'])
-    # author_id = game['author_id']
-    # author = Author.all.find { |a| a.id == author_id }
-    # game['author'] = author unless author.nil?
     new(game['publish_date'], game)
   end
 end
