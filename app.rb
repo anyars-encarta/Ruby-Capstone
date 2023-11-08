@@ -1,14 +1,19 @@
+# frozen_string_literal: true
+
 require 'json'
 require './lib/item'
 require './lib/game/game'
 require './lib/game/author'
 require './lib/game/preserve-data/load_games_authors'
 require './lib/game/preserve-data/save_games_authors'
+require './lib/modules/add_new_music_album'
+require './lib/modules/list_genres'
 # Represents an app with various attributes such as item.
 class App
   attr_accessor :item
 
   def initialize
+    @genres = []
     @item = []
     load_data
   end
@@ -37,7 +42,7 @@ class App
   end
 
   def list_all_genres
-    puts 'List of all genres:'
+    list_genres
   end
 
   def list_all_labels
@@ -61,14 +66,19 @@ class App
     puts "Book created with title: #{title}, author: #{author}"
   end
 
+  # ADD NEW MUSIC ALBUM
   def add_a_music_album
-    puts 'Enter the album\'s title:'
-    album_title = gets.chomp
-
-    puts 'Enter the album\'s artiste:'
-    artiste = gets.chomp
-
-    puts "Music album created with title: #{album_title}, artiste: #{artiste}"
+    puts 'Create Music Album:'
+    puts 'The Album is in Spotify? (y/n)'
+    on_spotify = gets.chomp
+    puts 'Enter the publish date:(yyyy-mm-dd)'
+    publish_date = gets.chomp
+    @album = add_new_music_album(publish_date, on_spotify)
+    puts 'Choose a Genre:'
+    list_genres
+    puts "#{@genres.length + 1}) Add new Genre"
+    music_album_save_genre
+    @item << @album
   end
 
   def add_a_game
@@ -116,5 +126,19 @@ class App
 
   def add_game_to_collection(game)
     @item << game
+  end
+
+  def music_album_save_genre
+    genre = gets.chomp
+    if genre == @genres.length + 1
+      puts 'Write the name of the new genre:'
+      new_genre_name = gets.chomp
+      @new_genre = add_new_genre(new_genre_name)
+      @new_genre.add_item(@album)
+      @genres << new_genre
+      @album.save_genre(@new_genre)
+    else
+      @album.save_genre(@genres[genre])
+    end
   end
 end

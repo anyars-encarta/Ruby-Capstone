@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'fileutils'
 require 'json'
 
-DATA_PATH = 'lib/data'.freeze
+DATA_PATH = 'lib/data'
 FileUtils.mkdir_p(DATA_PATH)
 
 def save_games_authors
