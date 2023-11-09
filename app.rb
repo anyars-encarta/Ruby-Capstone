@@ -10,6 +10,7 @@ require './lib/modules/save_genre_album_data'
 require './lib/modules/load_genre_album_data'
 require './lib/book/book'
 require './lib/book/label'
+require './lib/modules/add_book'
 
 # Represents an app with various attributes such as item.
 class App
@@ -17,6 +18,7 @@ class App
   include ListGenres
   include SaveGenreAlbumData
   include LoadGenreAlbumData
+  include NEWBOOK
   attr_accessor :item
 
   include SaveGamesAuthorsData
@@ -69,14 +71,13 @@ class App
     else
       @books.each do |item|
         print "ID: #{item.id}, Publish Date: #{item.publish_date}, Publisher: #{item.publisher}"
-        print " Cover State: #{item.cover_state}, Label ID: #{item.label_id}"
+        puts " Cover State: #{item.cover_state}, Label ID: #{item.label_id}"
       end
     end
   end
 
   def list_all_labels
     puts 'List of all labels:'
-
     if @label.empty?
       puts 'No labels added'
     else
@@ -119,12 +120,9 @@ class App
   def add_a_game
     game_title, first_name, last_name = prompt_for_game_info
     game_author = create_game_author(first_name, last_name)
-
     Author.all << game_author
-
     game = create_game(game_title, game_author)
     game_author.add_item(game)
-
     add_game_to_collection(game)
     game_author.add_item(game)
     puts "Game created with title: #{game_title}, author: #{first_name} #{last_name}"
@@ -132,7 +130,7 @@ class App
 
   def add_a_book
     puts 'Enter the book\'s publish date (YYYY-MM-DD):'
-    publish_date = gets.chomp
+    date = gets.chomp
     puts 'Enter the book\'s publisher:'
     publisher = gets.chomp
     puts 'Select the book\'s label:'
@@ -147,11 +145,7 @@ class App
     puts '2. Bad'
     cover_state_choice = gets.chomp.to_i
     cover_state = cover_state_choice == 1 ? 'Good' : 'Bad'
-    label = Label.new(label_title, label_color)
-    @label << label
-    book = Book.new(publish_date, publisher, cover_state, label.id)
-    @books << book
-    puts 'Book added successfully!'
+    add_new_book(date, publisher, cover_state, label_title, label_color)
   end
 
   private
@@ -159,13 +153,10 @@ class App
   def prompt_for_game_info
     puts 'Enter the game\'s title:'
     game_title = gets.chomp
-
     puts 'Enter the game\'s author first name:'
     first_name = gets.chomp
-
     puts 'Enter the game\'s author last name:'
     last_name = gets.chomp
-
     [game_title, first_name, last_name]
   end
 
