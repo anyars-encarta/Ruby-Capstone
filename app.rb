@@ -95,7 +95,6 @@ class App
     list_genres
     puts "#{@genres.length}) Add new Genre"
     music_album_save_genre
-    @album.genre = @genres[genre]
     @albums << @album
     puts 'Album created successfully'
     save_genre
