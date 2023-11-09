@@ -1,3 +1,5 @@
+CREATE DATABASE catalog;
+
 -- Games
 CREATE TABLE games (
   item_id INT REFERENCES items(id) ON DELETE CASCADE,
@@ -17,5 +19,22 @@ CREATE TABLE items (
   id INT PRIMARY KEY,
   author_id INT REFERENCES authors(id) ON DELETE CASCADE,
   publish_date DATE,
-  archived BOOLEAN DEFAULT FALSE
+  archived BOOLEAN DEFAULT FALSE,
+  genre_id INT REFERENCES genres(id) ON DELETE CASCADE
 );
+
+-- Music Albums
+CREATE TABLE music_albums (
+  id INT PRIMARY KEY,
+  on_spotify BOOLEAN,
+  genre_id INT REFERENCES genres(id) ON DELETE CASCADE,
+  item_id INT REFERENCES items(id) ON DELETE CASCADE
+);
+
+-- Genre
+CREATE TABLE genres (
+  id INT PRIMARY KEY,
+  name VARCHAR(20),
+  music_id INT REFERENCES music_albums(id) ON DELETE CASCADE
+);
+
