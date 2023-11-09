@@ -29,7 +29,7 @@ module NEWBOOK
       puts 'No books added'
     else
       @books.each do |item|
-        print "ID: #{item.id}, Publish Date: #{item.publish_date}, Publisher: #{item.publisher}"
+        print "ID: #{item.id}, Publish Date: #{item.publish_date}, Publisher: #{item.publisher},"
         puts " Cover State: #{item.cover_state}, Label ID: #{item.label_id}"
       end
     end
