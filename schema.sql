@@ -20,27 +20,21 @@ CREATE TABLE items (
   author_id INT REFERENCES authors(id) ON DELETE CASCADE,
   publish_date DATE,
   archived BOOLEAN DEFAULT FALSE,
-  genre_id integer,
-  FOREIGN KEY (genre_id) REFERENCES genres(id) ON DELETE CASCADE
+  genre_id INT REFERENCES genre(id) ON DELETE CASCADE
 );
 
 -- Music Albums
 CREATE TABLE music_album (
-  id integer GENERATED ALWAYS AS IDENTITY,
+  id INT PRIMARY KEY,
   on_spotify BOOLEAN,
-  genre_id integer,
-  item_id integer,
-  PRIMARY KEY (id),
-  FOREIGN KEY(genre_id) REFERENCES GENRE (id) ON DELETE CASCADE,
-  FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE
+  genre_id INT REFERENCES genres(id) ON DELETE CASCADE,
+  item_id INT REFERENCES items(id) ON DELETE CASCADE
 );
 
 -- Genre
 CREATE TABLE genre (
-  id integer GENERATED ALWAYS AS IDENTITY,
+  id INT PRIMARY KEY,
   name VARCHAR(20),
-  music_id integer,
-  PRIMARY KEY (id),
-  FOREIGN KEY(music_id) REFERENCES MUSICALBUM (id) ON DELETE CASCADE,
+  music_id INT REFERENCES items(id) ON DELETE CASCADE
 );
 
