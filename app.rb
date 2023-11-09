@@ -17,6 +17,8 @@ class App
   include LoadGenreAlbumData
   attr_accessor :item
 
+  include SaveGamesAuthorsData
+
   def initialize
     @genres = []
     @albums = []
