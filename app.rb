@@ -6,10 +6,15 @@ require './lib/game/preserve-data/load_games_authors'
 require './lib/game/preserve-data/save_games_authors'
 require './lib/modules/add_new_music_album'
 require './lib/modules/list_genres'
+require './lib/modules/save_genre_album_data'
+require './lib/modules/load_genre_album_data'
+
 # Represents an app with various attributes such as item.
 class App
   include AddNewMusicAlbum
   include ListGenres
+  include SaveGenreAlbumData
+  include LoadGenreAlbumData
   attr_accessor :item
 
   def initialize
@@ -17,6 +22,8 @@ class App
     @albums = []
     @item = []
     load_data
+    load_genre_data
+    load_music_album_data
   end
 
   def load_data
@@ -86,6 +93,8 @@ class App
     music_album_save_genre
     @albums << @album
     puts 'Album created successfully'
+    save_genre
+    save_music_album
   end
 
   def add_a_game
