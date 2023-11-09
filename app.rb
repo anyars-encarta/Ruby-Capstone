@@ -10,6 +10,7 @@ require './lib/modules/save_genre_album_data'
 require './lib/modules/load_genre_album_data'
 require './lib/book/book'
 require './lib/book/label'
+require './lib/modules/add_book'
 
 # Represents an app with various attributes such as item.
 class App
@@ -17,6 +18,7 @@ class App
   include ListGenres
   include SaveGenreAlbumData
   include LoadGenreAlbumData
+  include NEWBOOK
   attr_accessor :item
 
   include SaveGamesAuthorsData
@@ -27,6 +29,7 @@ class App
     @item = []
     @label = []
     @author = []
+    @books = []
     load_data
     load_genre_data
     load_music_album_data
@@ -48,10 +51,10 @@ class App
     puts 'List of all games:'
 
     if @item.empty?
-       puts 'No games added'
-      else
+      puts 'No games added'
+    else
       @item.each do |item|
-       puts "Title: #{item.title}, Author: #{item.author.full_name}" if item.is_a?(Game)
+        puts "Title: #{item.title}, Author: #{item.author.full_name}" if item.is_a?(Game)
       end
     end
   end
@@ -62,29 +65,11 @@ class App
   end
 
   def list_all_books
-    puts 'List of all books:'
-
-    if @item.empty?
-      puts 'No books added'
-    else
-        @item.each do |item|
-          if item.is_a?(Book)
-            puts "Book ID: #{item.id}, Publish Date: #{item.publish_date}, Publisher: #{item.publisher}, Cover State: #{item.cover_state}, Label ID: #{item.label_id}, Archived: #{item.archived}"
-          end
-        end
-    end
+    list_books
   end
 
   def list_all_labels
-    puts 'List of all labels:'
-
-    if @label.empty?
-      puts 'No labels added'
-     else
-        @label.each do |label|
-          puts "Label ID: #{label.id}, Title: #{label.title}, Color: #{label.color}"
-        end
-    end
+    list_labels
   end
 
   def list_all_authors
@@ -110,7 +95,6 @@ class App
     list_genres
     puts "#{@genres.length}) Add new Genre"
     music_album_save_genre
-    @album.genre = @genres[genre]
     @albums << @album
     puts 'Album created successfully'
     save_genre
@@ -120,12 +104,9 @@ class App
   def add_a_game
     game_title, first_name, last_name = prompt_for_game_info
     game_author = create_game_author(first_name, last_name)
-
     Author.all << game_author
-
     game = create_game(game_title, game_author)
     game_author.add_item(game)
-
     add_game_to_collection(game)
     game_author.add_item(game)
     puts "Game created with title: #{game_title}, author: #{first_name} #{last_name}"
@@ -133,68 +114,27 @@ class App
 
   def add_a_book
     puts 'Enter the book\'s publish date (YYYY-MM-DD):'
-    publish_date = gets.chomp
-  
-    puts "Publish Date: #{publish_date}"
-
+    date = gets.chomp
     puts 'Enter the book\'s publisher:'
     publisher = gets.chomp
-  
-    puts "Publisher: #{publisher}"
-
-    puts 'Select the book\'s label:'
-    puts '1. Gift'
-    puts '2. New'
+    puts "Select label:\n1. Gift\n2. New\n"
     label_choice = gets.chomp.to_i
-  
-    puts "Label Choice: #{label_choice}"
-
-    label_title = label_choice == 1 ? 'Gift' : 'New'
-    
-    puts "Label Title: #{label_title}"
-
     puts 'Enter the book\'s label color:'
     label_color = gets.chomp
-  
-    puts "Label Color: #{label_color}"
-
-    puts 'Select the book\'s cover state:'
-    puts '1. Good'
-    puts '2. Bad'
+    print "Select cover state: \n1. Good \n2. Bad\n"
     cover_state_choice = gets.chomp.to_i
-  
-    puts "Cover State Choice: #{cover_state_choice}"
-
-    cover_state = cover_state_choice == 1 ? 'Good' : 'Bad'
-  
-    puts "Cover State: #{cover_state}"
-
-    item_id = rand(1..500)
-  
-    puts "Item ID: #{item_id}"
-  
-    label = Label.new(title: label_title, color: label_color, book_id: item_id)
-
-    puts "The Label is: #{label}"
-  
-    book = Book.new(publish_date: publish_date, publisher: publisher, cover_state: cover_state, label_id: label.id, item_id: item_id)
-  
-    puts 'Book added successfully!'
-    book
+    add_new_book(date, publisher, cover_state_choice, label_choice, label_color)
   end
-  
+
   private
 
   def prompt_for_game_info
     puts 'Enter the game\'s title:'
     game_title = gets.chomp
-
     puts 'Enter the game\'s author first name:'
     first_name = gets.chomp
-
     puts 'Enter the game\'s author last name:'
     last_name = gets.chomp
-
     [game_title, first_name, last_name]
   end
 
@@ -225,7 +165,6 @@ class App
       @new_genre = add_new_genre(new_genre_name)
       @new_genre.add_item(@album)
       @genres << @new_genre
-      @album.genre = @new_genre
       @album.save_genre(@new_genre)
       puts 'Genre created successfully'
     else

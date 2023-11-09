@@ -5,21 +5,16 @@ class Item
   attr_accessor :genre, :genre_id, :author, :author_id, :label_id
   attr_reader :id, :publish_date, :archived
 
-  @@items = []
+  @items = []
 
-  def initialize(publish_date, archived: false, genre_id: nil, author_id: nil, label_id: nil)
+  def initialize(publish_date, archived: false)
     @id = rand(1..500)
     @publish_date = Date.strptime(publish_date.to_s, '%Y-%m-%d')
     @archived = archived
-    @genre_id = genre_id
-    @author_id = author_id
-    @label_id = label_id
-
-    @@items << self
   end
 
   def self.all
-    @@items
+    @items
   end
 
   def save_genre(genre)
