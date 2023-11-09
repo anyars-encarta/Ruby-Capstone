@@ -1,14 +1,18 @@
 require 'json'
 
 module SaveGenreAlbumData
-  ALBUMS_FILE = 'lib/storage/music_albums.json'.freeze
-  GENRES_FILE = 'lib/storage/genres.json'.freeze
+  ALBUMS_FILE = 'lib/data/music_albums.json'.freeze
+  GENRES_FILE = 'lib/data/genres.json'.freeze
+  DATA_PATH = 'lib/data'.freeze
 
   def save_genre
-    hash = @genres.map do |genre|
-      {
+    hash = []
+    FileUtils.mkdir_p(DATA_PATH) unless File.exist?(GENRES_FILE)
+    @genres.each do |genre|
+      aux = {
         name: genre.name
       }
+      hash << aux
     end
     File.write(GENRES_FILE, JSON.pretty_generate(hash))
   end
