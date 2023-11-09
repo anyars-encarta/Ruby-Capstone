@@ -27,6 +27,7 @@ class App
     @item = []
     @label = []
     @author = []
+    @books = []
     load_data
     load_genre_data
     load_music_album_data
@@ -48,10 +49,10 @@ class App
     puts 'List of all games:'
 
     if @item.empty?
-       puts 'No games added'
-      else
+      puts 'No games added'
+    else
       @item.each do |item|
-       puts "Title: #{item.title}, Author: #{item.author.full_name}" if item.is_a?(Game)
+        puts "Title: #{item.title}, Author: #{item.author.full_name}" if item.is_a?(Game)
       end
     end
   end
@@ -64,14 +65,12 @@ class App
   def list_all_books
     puts 'List of all books:'
 
-    if @item.empty?
+    if @books.empty?
       puts 'No books added'
     else
-        @item.each do |item|
-          if item.is_a?(Book)
-            puts "Book ID: #{item.id}, Publish Date: #{item.publish_date}, Publisher: #{item.publisher}, Cover State: #{item.cover_state}, Label ID: #{item.label_id}, Archived: #{item.archived}"
-          end
-        end
+      @books.each do |item|
+        puts "Book ID: #{item.id}, Publish Date: #{item.publish_date}, Publisher: #{item.publisher}, Cover State: #{item.cover_state}, Label ID: #{item.label_id}, Archived: #{item.archived}"
+      end
     end
   end
 
@@ -80,10 +79,10 @@ class App
 
     if @label.empty?
       puts 'No labels added'
-     else
-        @label.each do |label|
-          puts "Label ID: #{label.id}, Title: #{label.title}, Color: #{label.color}"
-        end
+    else
+      @label.each do |label|
+        puts "Label ID: #{label.id}, Title: #{label.title}, Color: #{label.color}"
+      end
     end
   end
 
@@ -134,55 +133,52 @@ class App
   def add_a_book
     puts 'Enter the book\'s publish date (YYYY-MM-DD):'
     publish_date = gets.chomp
-  
+
     puts "Publish Date: #{publish_date}"
 
     puts 'Enter the book\'s publisher:'
     publisher = gets.chomp
-  
+
     puts "Publisher: #{publisher}"
 
     puts 'Select the book\'s label:'
     puts '1. Gift'
     puts '2. New'
     label_choice = gets.chomp.to_i
-  
+
     puts "Label Choice: #{label_choice}"
 
     label_title = label_choice == 1 ? 'Gift' : 'New'
-    
+
     puts "Label Title: #{label_title}"
 
     puts 'Enter the book\'s label color:'
     label_color = gets.chomp
-  
+
     puts "Label Color: #{label_color}"
 
     puts 'Select the book\'s cover state:'
     puts '1. Good'
     puts '2. Bad'
     cover_state_choice = gets.chomp.to_i
-  
+
     puts "Cover State Choice: #{cover_state_choice}"
 
     cover_state = cover_state_choice == 1 ? 'Good' : 'Bad'
-  
+
     puts "Cover State: #{cover_state}"
 
-    item_id = rand(1..500)
-  
-    puts "Item ID: #{item_id}"
-  
-    label = Label.new(title: label_title, color: label_color, book_id: item_id)
+    label = Label.new(label_title, label_color)
+    @label << label
 
-    puts "The Label is: #{label}"
-  
-    book = Book.new(publish_date: publish_date, publisher: publisher, cover_state: cover_state, label_id: label.id, item_id: item_id)
-  
+    puts "The Label is: #{label.title}"
+
+    book = Book.new(publish_date, publisher, cover_state, label.id)
+
+    @books << book
     puts 'Book added successfully!'
-    book
   end
-  
+
   private
 
   def prompt_for_game_info
