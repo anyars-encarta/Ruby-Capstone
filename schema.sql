@@ -24,7 +24,7 @@ CREATE TABLE items (
 );
 
 -- Music Albums
-CREATE TABLE music_album (
+CREATE TABLE music_albums (
   id INT PRIMARY KEY,
   on_spotify BOOLEAN,
   genre_id INT REFERENCES genres(id) ON DELETE CASCADE,
@@ -32,7 +32,7 @@ CREATE TABLE music_album (
 );
 
 -- Genre
-CREATE TABLE genre (
+CREATE TABLE genres (
   id INT PRIMARY KEY,
   name VARCHAR(20),
   music_id INT REFERENCES items(id) ON DELETE CASCADE
