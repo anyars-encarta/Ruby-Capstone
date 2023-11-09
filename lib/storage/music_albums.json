@@ -1,0 +1,17 @@
+[
+  {
+    "publish_date": "2020-10-10",
+    "on_spotify": true,
+    "genre": "pop"
+  },
+  {
+    "publish_date": "2020-02-02",
+    "on_spotify": true,
+    "genre": "rock"
+  },
+  {
+    "publish_date": "2010-10-05",
+    "on_spotify": false,
+    "genre": "cumbia"
+  }
+]
