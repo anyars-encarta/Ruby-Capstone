@@ -13,7 +13,6 @@ require './lib/book/label'
 require './lib/modules/add_book'
 require './lib/modules/save_book_label_data'
 
-
 # Represents an app with various attributes such as item.
 class App
   include AddNewMusicAlbum
