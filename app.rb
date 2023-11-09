@@ -65,26 +65,11 @@ class App
   end
 
   def list_all_books
-    puts 'List of all books:'
-    if @books.empty?
-      puts 'No books added'
-    else
-      @books.each do |item|
-        print "ID: #{item.id}, Publish Date: #{item.publish_date}, Publisher: #{item.publisher}"
-        puts " Cover State: #{item.cover_state}, Label ID: #{item.label_id}"
-      end
-    end
+    list_books
   end
 
   def list_all_labels
-    puts 'List of all labels:'
-    if @label.empty?
-      puts 'No labels added'
-    else
-      @label.each do |label|
-        puts "Label ID: #{label.id}, Title: #{label.title}, Color: #{label.color}"
-      end
-    end
+    list_labels
   end
 
   def list_all_authors
@@ -133,19 +118,13 @@ class App
     date = gets.chomp
     puts 'Enter the book\'s publisher:'
     publisher = gets.chomp
-    puts 'Select the book\'s label:'
-    puts '1. Gift'
-    puts '2. New'
+    puts "Select the book\'s label:\n1. Gift'\n2. New\n"
     label_choice = gets.chomp.to_i
-    label_title = label_choice == 1 ? 'Gift' : 'New'
     puts 'Enter the book\'s label color:'
     label_color = gets.chomp
-    puts 'Select the book\'s cover state:'
-    puts '1. Good'
-    puts '2. Bad'
+    print "Select cover state: \n1. Good \n2. Bad\n"
     cover_state_choice = gets.chomp.to_i
-    cover_state = cover_state_choice == 1 ? 'Good' : 'Bad'
-    add_new_book(date, publisher, cover_state, label_title, label_color)
+    add_new_book(date, publisher, cover_state_choice, label_choice, label_color)
   end
 
   private
