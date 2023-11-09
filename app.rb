@@ -11,6 +11,8 @@ require './lib/modules/load_genre_album_data'
 require './lib/book/book'
 require './lib/book/label'
 require './lib/modules/add_book'
+require './lib/modules/save_book_label_data'
+
 
 # Represents an app with various attributes such as item.
 class App
@@ -19,6 +21,7 @@ class App
   include SaveGenreAlbumData
   include LoadGenreAlbumData
   include NEWBOOK
+  include SaveBookLabelData
   attr_accessor :item
 
   include SaveGamesAuthorsData
