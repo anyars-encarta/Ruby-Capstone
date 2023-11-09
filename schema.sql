@@ -25,7 +25,7 @@ CREATE TABLE items (
 );
 
 -- Music Albums
-CREATE TABLE MUSICALBUM (
+CREATE TABLE music_album (
   id integer GENERATED ALWAYS AS IDENTITY,
   on_spotify BOOLEAN,
   genre_id integer,
@@ -36,7 +36,7 @@ CREATE TABLE MUSICALBUM (
 );
 
 -- Genre
-CREATE TABLE GENRE (
+CREATE TABLE genre (
   id integer GENERATED ALWAYS AS IDENTITY,
   name VARCHAR(20),
   music_id integer,
