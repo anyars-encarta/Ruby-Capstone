@@ -118,7 +118,7 @@ class App
     date = gets.chomp
     puts 'Enter the book\'s publisher:'
     publisher = gets.chomp
-    puts "Select the book\'s label:\n1. Gift'\n2. New\n"
+    puts "Select label:\n1. Gift\n2. New\n"
     label_choice = gets.chomp.to_i
     puts 'Enter the book\'s label color:'
     label_color = gets.chomp
