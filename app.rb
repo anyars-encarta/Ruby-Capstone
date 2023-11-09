@@ -64,12 +64,12 @@ class App
 
   def list_all_books
     puts 'List of all books:'
-
     if @books.empty?
       puts 'No books added'
     else
       @books.each do |item|
-        puts "Book ID: #{item.id}, Publish Date: #{item.publish_date}, Publisher: #{item.publisher}, Cover State: #{item.cover_state}, Label ID: #{item.label_id}, Archived: #{item.archived}"
+        print "ID: #{item.id}, Publish Date: #{item.publish_date}, Publisher: #{item.publisher}"
+        print " Cover State: #{item.cover_state}, Label ID: #{item.label_id}"
       end
     end
   end
@@ -133,48 +133,23 @@ class App
   def add_a_book
     puts 'Enter the book\'s publish date (YYYY-MM-DD):'
     publish_date = gets.chomp
-
-    puts "Publish Date: #{publish_date}"
-
     puts 'Enter the book\'s publisher:'
     publisher = gets.chomp
-
-    puts "Publisher: #{publisher}"
-
     puts 'Select the book\'s label:'
     puts '1. Gift'
     puts '2. New'
     label_choice = gets.chomp.to_i
-
-    puts "Label Choice: #{label_choice}"
-
     label_title = label_choice == 1 ? 'Gift' : 'New'
-
-    puts "Label Title: #{label_title}"
-
     puts 'Enter the book\'s label color:'
     label_color = gets.chomp
-
-    puts "Label Color: #{label_color}"
-
     puts 'Select the book\'s cover state:'
     puts '1. Good'
     puts '2. Bad'
     cover_state_choice = gets.chomp.to_i
-
-    puts "Cover State Choice: #{cover_state_choice}"
-
     cover_state = cover_state_choice == 1 ? 'Good' : 'Bad'
-
-    puts "Cover State: #{cover_state}"
-
     label = Label.new(label_title, label_color)
     @label << label
-
-    puts "The Label is: #{label.title}"
-
     book = Book.new(publish_date, publisher, cover_state, label.id)
-
     @books << book
     puts 'Book added successfully!'
   end
