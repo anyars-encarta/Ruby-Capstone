@@ -165,7 +165,6 @@ class App
       @new_genre = add_new_genre(new_genre_name)
       @new_genre.add_item(@album)
       @genres << @new_genre
-      @album.genre = @new_genre
       @album.save_genre(@new_genre)
       puts 'Genre created successfully'
     else

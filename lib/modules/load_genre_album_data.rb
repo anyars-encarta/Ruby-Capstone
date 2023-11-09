@@ -2,8 +2,8 @@ require_relative '../genre'
 require_relative '../music_album'
 
 module LoadGenreAlbumData
-  ALBUMS_FILE = 'lib/storage/music_albums.json'.freeze
-  GENRES_FILE = 'lib/storage/genres.json'.freeze
+  ALBUMS_FILE = 'lib/data/music_albums.json'.freeze
+  GENRES_FILE = 'lib/data/genres.json'.freeze
 
   def load_genre_data
     hash = []
