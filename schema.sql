@@ -20,7 +20,8 @@ CREATE TABLE items (
   author_id INT REFERENCES authors(id) ON DELETE CASCADE,
   publish_date DATE,
   archived BOOLEAN DEFAULT FALSE,
-  genre_id INT REFERENCES genres(id) ON DELETE CASCADE
+  genre_id INT REFERENCES genres(id) ON DELETE CASCADE,
+  label_id INT REFERENCES labels(id) ON DELETE CASCADE
 );
 
 -- Music Albums
@@ -38,3 +39,18 @@ CREATE TABLE genres (
   music_id INT REFERENCES music_albums(id) ON DELETE CASCADE
 );
 
+CREATE TABLE books (
+  id INT PRIMARY KEY,
+  publisher VARCHAR(20),
+  cover_state VARCHAR(20),
+  label_id INT REFERENCES labels(id) ON DELETE CASCADE,
+  item_id INT REFERENCES items(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE labels (
+  id INT PRIMARY KEY,
+  title varchar,
+  color varchar,
+  book_id INT  REFERENCES books(id) ON DELETE CASCADE
+);
