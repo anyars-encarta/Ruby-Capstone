@@ -11,6 +11,7 @@ module SaveBookLabelData
     FileUtils.mkdir_p(DATA_PATH) unless File.exist?(LABEL_FILE)
     @label.each do |label|
       aux = {
+        id: label.id,
         title: label.title,
         color: label.color
       }
@@ -23,10 +24,11 @@ module SaveBookLabelData
     hash = []
     @books.each do |book|
       aux = {
+        id: book.id,
         date: book.publish_date,
         publiser: book.publisher,
         cover_state: book.cover_state,
-        label: book.label_id
+        label_id: book.label_id
       }
       hash << aux
     end
