@@ -8,7 +8,6 @@ FileUtils.mkdir_p(DATA_PATH)
 module SaveGamesAuthorsData
   GAMES_FILE = 'lib/data/games.json'.freeze
   AUTHORS_FILE = 'lib/data/authors.json'.freeze
-  # DATA_PATH = 'lib/data'.freeze
 
   def save_games_authors
     games_with_item_id = assign_item_ids_to_games
