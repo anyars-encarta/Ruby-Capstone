@@ -18,5 +18,10 @@
     "publish_date": "2045-12-11",
     "on_spotify": true,
     "genre": "rock"
+  },
+  {
+    "publish_date": "2000-05-05",
+    "on_spotify": false,
+    "genre": "rock"
   }
 ]
