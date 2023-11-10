@@ -9,7 +9,7 @@
 
 <!-- MAIN HEADING -->
 
-  <h3><b>Catalog of My Things</b></h3>
+  <h3><b>Catalog App</b></h3>
 
 </div>
 
@@ -37,7 +37,7 @@
 - [📝 License](#license)
 
 <!-- INTRO -->
-# 📖 Catalog of My Things <a name="about-project"></a>
+# 📖 Catalog App <a name="about-project"></a>
 
 > This is a web application that helps to keep a record of different types of things you own: books, music albums, movies, and games.
 
@@ -59,7 +59,6 @@
 
 > - Keep catalog of books
 > - Keep catalog of music albums
-> - Keep catalog of movies
 > - Keep catalog of games
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -68,7 +67,7 @@
 
 LIVE DEMO
 
-> Visit the [live](https://) page of my the project.
+> Watch a [live](https://drive.google.com/file/d/1itp4gndEFGNHYehVzEFODrozzD4FntTY/view?usp=sharing) demo of the project.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -177,7 +176,7 @@ Contributions, issues, and feature requests are welcome!
 
 - **How were the Linters utilised?**
 
-  - The Linters were utilised with the help of resources provided by [@microverseinc](https://github.com/microverseinc).
+  - The Linters (Rubocop) were utilised with the help of resources provided by [@microverseinc](https://github.com/microverseinc).
 
 - **What new features should be expected in the next release of the project?**
 
