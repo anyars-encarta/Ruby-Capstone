@@ -10,8 +10,10 @@ class Main
   def main
     loop do
       puts ' '
-      puts 'Welcome to our Catalog App!'
-      puts '=================================='
+      puts '
+            █▀▀ █▀█ ▀█▀ █▀█ █░░ █▀█ █▀▀   █▀█ █▀█ █▀█
+            █▄▄ █▀█ ░█░ █▀█ █▄▄ █▄█ █▄█   █▀█ █▀▀ █▀▀'
+      puts ''
       puts 'Please select an option:'
 
       display_menu
