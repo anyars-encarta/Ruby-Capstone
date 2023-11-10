@@ -46,10 +46,10 @@ end
 
 def quit
   @app.save_data
-  puts 'Thank you for using our Catalog App. Goodbye!'
+  puts 'Thank you for using our Catalog App. 🇬​🇴​🇴​🇩​🇧​🇦​🇾​!'
   exit
 end
 
 def invalid_choice
-  puts 'Invalid choice. Please try again.'
+  puts 'Invalid choice ☠  Please try again.'
 end
