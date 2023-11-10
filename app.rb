@@ -22,7 +22,7 @@ class App
   include LoadGenreAlbumData
   include NEWBOOK
   include SaveBookLabelData
-include LoadGenreAlbumData
+  include LoadGenreAlbumData
   attr_accessor :item
 
   include SaveGamesAuthorsData
