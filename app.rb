@@ -45,10 +45,6 @@ class App
     load_games_authors
   end
 
-  def save_data
-    save_games_authors
-  end
-
   def list_all_music_albums
     list_albums
   end
@@ -114,7 +110,7 @@ class App
     game = create_game(game_title, game_author)
     game_author.add_item(game)
     add_game_to_collection(game)
-    game_author.add_item(game)
+    save_games_authors
     puts "Game created with title: #{game_title}, author: #{first_name} #{last_name}"
   end
 
