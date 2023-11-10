@@ -19,7 +19,7 @@ class Main
       display_menu
       choice = gets.chomp.to_i
       handle_choice(choice)
-      puts '=================================='
+      puts '============================================'
     end
   end
 end
