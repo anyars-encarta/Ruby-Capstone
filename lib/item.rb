@@ -18,7 +18,7 @@ class Item
   end
 
   def save_genre(genre)
-    @genre_id = genre.id
+    @genre = genre
   end
 
   def save_author(author)
@@ -28,7 +28,7 @@ class Item
   end
 
   def save_label(label)
-    @label_id = label.id
+    @label = label
   end
 
   def can_be_archived
