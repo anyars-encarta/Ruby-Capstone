@@ -1,7 +1,22 @@
 [
   {
-    "publish_date": "2023-06-24",
+    "publish_date": "2020-02-02",
     "on_spotify": true,
-    "genre": "Hiphop"
+    "genre": "pop"
+  },
+  {
+    "publish_date": "1996-02-02",
+    "on_spotify": false,
+    "genre": "pop"
+  },
+  {
+    "publish_date": "2222-05-05",
+    "on_spotify": true,
+    "genre": "pop"
+  },
+  {
+    "publish_date": "2045-12-11",
+    "on_spotify": true,
+    "genre": "rock"
   }
 ]

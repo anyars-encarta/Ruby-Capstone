@@ -7,8 +7,10 @@ module NEWBOOK
     cover_state = cover == 1 ? 'Good' : 'Bad'
     label = Label.new(l_title, l_color)
     @label << label
+    save_label
     book = Book.new(date, publisher, cover_state, label.id)
     @books << book
+    save_book
     puts 'Book added successfully!'
   end
 

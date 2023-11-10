@@ -11,6 +11,8 @@ require './lib/modules/load_genre_album_data'
 require './lib/book/book'
 require './lib/book/label'
 require './lib/modules/add_book'
+require './lib/modules/save_book_label_data'
+require './lib/modules/load_book_label_data'
 
 # Represents an app with various attributes such as item.
 class App
@@ -19,6 +21,8 @@ class App
   include SaveGenreAlbumData
   include LoadGenreAlbumData
   include NEWBOOK
+  include SaveBookLabelData
+  include LoadGenreAlbumData
   attr_accessor :item
 
   include SaveGamesAuthorsData
@@ -33,6 +37,8 @@ class App
     load_data
     load_genre_data
     load_music_album_data
+    load_label_data
+    load_book_data
   end
 
   def load_data
@@ -168,7 +174,6 @@ class App
       @album.save_genre(@new_genre)
       puts 'Genre created successfully'
     else
-      @album.genre = @genres[genre_choice]
       @album.save_genre(@genres[genre_choice])
     end
   end
