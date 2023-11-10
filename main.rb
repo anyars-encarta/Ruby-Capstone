@@ -14,7 +14,7 @@ class Main
             █▀▀ █▀█ ▀█▀ █▀█ █░░ █▀█ █▀▀   █▀█ █▀█ █▀█
             █▄▄ █▀█ ░█░ █▀█ █▄▄ █▄█ █▄█   █▀█ █▀▀ █▀▀'
       puts ''
-      puts 'Please select an option:'
+      puts 'ᴘʟᴇᴀsᴇ sᴇʟᴇcᴛ ᴀɴ ᴏᴘᴛɪᴏɴ:'
 
       display_menu
       choice = gets.chomp.to_i
