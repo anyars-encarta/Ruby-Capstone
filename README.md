@@ -39,7 +39,7 @@
 <!-- INTRO -->
 # 📖 Catalog App <a name="about-project"></a>
 
-> This is a web application that helps to keep a record of different types of things you own: books, music albums, movies, and games. The items added are stored in local storage as JSON files. On the launch of the app, the preserved items are fetched from the local
+> This is a web application that helps to keep a record of different types of things you own: books, music albums, movies, and games. The items added are stored in local storage as JSON files. On the launch of the app, the preserved items are fetched from the local storage.
 
 ## 🛠 Built With <a name="built-with"></a>
 1. Ruby
